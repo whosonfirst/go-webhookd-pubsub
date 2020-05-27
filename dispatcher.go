@@ -1,9 +1,9 @@
-package dispatchers
+package pubsub
 
 import (
 	"context"
-	"github.com/whosonfirst/go-webhookd/v2"
-	"github.com/whosonfirst/go-webhookd/v2/dispatchers"
+	"github.com/whosonfirst/go-webhookd/v3"
+	"github.com/whosonfirst/go-webhookd/v3/dispatcher"
 	"gopkg.in/redis.v1"
 	"net/url"
 )
@@ -11,7 +11,7 @@ import (
 func init() {
 
 	ctx := context.Background()
-	err := dispatchers.RegisterDispatcher(ctx, "pubsub", NewPubSubDispatcher)
+	err := dispatcher.RegisterDispatcher(ctx, "pubsub", NewPubSubDispatcher)
 
 	if err != nil {
 		panic(err)
