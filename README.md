@@ -6,6 +6,14 @@ go-webhookd support for publishing to PubSub channels.
 
 Before you begin please [read the go-webhookd documentation](https://github.com/whosonfirst/go-webhookd/blob/master/README.md) for an overview of concepts and principles.
 
+## Usage
+
+```
+import (
+	_ "github.com/go-webhookd-pubsub"
+)
+```
+
 ## Dispatchers
 
 ### PubSub
