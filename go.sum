@@ -116,6 +116,8 @@ github.com/whosonfirst/algnhsa v0.1.0/go.mod h1:swLBXxaVTv3s6dJLhekdQCuCTshUew+x
 github.com/whosonfirst/go-sanitize v0.1.0/go.mod h1:p/emgbafMM0p5iVAz2XWwecYPl06Tw4Jos9rhTKIrt8=
 github.com/whosonfirst/go-webhookd/v3 v3.0.0 h1:wnBKaOU75HAYdS29R8BHpPb/pl24TiX2oFGPts0+kqo=
 github.com/whosonfirst/go-webhookd/v3 v3.0.0/go.mod h1:a4RlfZkEEgs2HZV73IvxdD6huHQ5gWoYeuaX8JRHOAI=
+github.com/whosonfirst/go-webhookd/v3 v3.0.1 h1:k+1PloYWuyPKfTkIr+q8eoMdy2AzuAUV/ec72vCi3ZA=
+github.com/whosonfirst/go-webhookd/v3 v3.0.1/go.mod h1:a4RlfZkEEgs2HZV73IvxdD6huHQ5gWoYeuaX8JRHOAI=
 go.opencensus.io v0.15.0/go.mod h1:UffZAU+4sDEINUGP/B7UfBBkq4fqLu9zXAX7ke6CHW0=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
 go.opencensus.io v0.22.0/go.mod h1:+kGneAE2xo2IficOXnaByMWTGM9T73dGwxeWcUqIpI8=
