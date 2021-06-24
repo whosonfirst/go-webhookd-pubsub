@@ -2,9 +2,9 @@ package pubsub
 
 import (
 	"context"
+	"github.com/go-redis/redis/v8"
 	"github.com/whosonfirst/go-webhookd/v3"
 	"github.com/whosonfirst/go-webhookd/v3/dispatcher"
-	"gopkg.in/redis.v1"
 	"net/url"
 )
 
@@ -35,13 +35,13 @@ func NewPubSubDispatcher(ctx context.Context, uri string) (webhookd.WebhookDispa
 	endpoint := u.Host
 	channel := u.Path
 
-	client := redis.NewTCPClient(&redis.Options{
+	client := redis.NewClient(&redis.Options{
 		Addr: endpoint,
 	})
 
 	// defer client.Close()
 
-	_, err = client.Ping().Result()
+	_, err = client.Ping(ctx).Result()
 
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (dispatcher *PubSubDispatcher) Dispatch(ctx context.Context, body []byte) *
 		// pass
 	}
 
-	rsp := dispatcher.client.Publish(dispatcher.channel, string(body))
+	rsp := dispatcher.client.Publish(ctx, dispatcher.channel, string(body))
 
 	_, err := rsp.Result()
 

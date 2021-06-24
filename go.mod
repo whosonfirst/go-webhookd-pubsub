@@ -1,10 +1,9 @@
 module github.com/whosonfirst/go-webhookd-pubsub
 
-go 1.12
+go 1.16
 
 require (
-	github.com/sfomuseum/go-flags v0.3.1
-	github.com/whosonfirst/go-webhookd/v3 v3.0.1
-	gopkg.in/bufio.v1 v1.0.0-20140618132640-567b2bfa514e // indirect
-	gopkg.in/redis.v1 v1.0.0-20140702131110-4ea3e7531bf7
+	github.com/go-redis/redis/v8 v8.10.0
+	github.com/sfomuseum/go-flags v0.8.2
+	github.com/whosonfirst/go-webhookd/v3 v3.0.3
 )
