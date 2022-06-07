@@ -1,8 +1,10 @@
 # go-webhookd-pubsub
 
-go-webhookd support for publishing to PubSub channels.
+Go package to implement the `whosonfirst/go-webhookd` interfaces for dispatching webhooks messages to a Redis PubSub channel.
 
-## go-webhookd
+## Documentation
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/whosonfirst/go-webhookd-pubsub.svg)](https://pkg.go.dev/github.com/whosonfirst/go-webhookd-pubsub)
 
 Before you begin please [read the go-webhookd documentation](https://github.com/whosonfirst/go-webhookd/blob/master/README.md) for an overview of concepts and principles.
 

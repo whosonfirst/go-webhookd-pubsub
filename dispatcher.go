@@ -32,7 +32,7 @@ type PubSubDispatcher struct {
 
 // NewPubSubDispatcher returns a new `PubSubDispatcher` instance configured by 'uri' in the form of:
 //
-// 	pubsub://{REDIS_HOST}/{REDIS_CHANNEL}
+// 	pubsub://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CHANNEL}
 func NewPubSubDispatcher(ctx context.Context, uri string) (webhookd.WebhookDispatcher, error) {
 
 	u, err := url.Parse(uri)
