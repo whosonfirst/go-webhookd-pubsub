@@ -2,10 +2,13 @@ package pubsub
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/whosonfirst/go-webhookd/v3"
 	"github.com/whosonfirst/go-webhookd/v3/dispatcher"
+	_ "log"
 	"net/url"
+	"strings"
 )
 
 func init() {
@@ -18,22 +21,30 @@ func init() {
 	}
 }
 
+// PubSubDispatcher implements the `webhookd.WebhookDispatcher` interface for dispatching messages to a Redis PubSub channel.
 type PubSubDispatcher struct {
 	webhookd.WebhookDispatcher
-	client  *redis.Client
+	// client is a `redis.Client` instance used to deliver messages.
+	client *redis.Client
+	// channel is the name of the Redis PubSub channel to publish messages to.
 	channel string
 }
 
+// NewPubSubDispatcher returns a new `PubSubDispatcher` instance configured by 'uri' in the form of:
+//
+// 	pubsub://{REDIS_HOST}/{REDIS_CHANNEL}
 func NewPubSubDispatcher(ctx context.Context, uri string) (webhookd.WebhookDispatcher, error) {
 
 	u, err := url.Parse(uri)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed to parse URI, %w", err)
 	}
 
 	endpoint := u.Host
 	channel := u.Path
+
+	channel = strings.TrimLeft(channel, "/")
 
 	client := redis.NewClient(&redis.Options{
 		Addr: endpoint,
@@ -44,18 +55,19 @@ func NewPubSubDispatcher(ctx context.Context, uri string) (webhookd.WebhookDispa
 	_, err = client.Ping(ctx).Result()
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed to ping Redis host, %w", err)
 	}
 
-	dispatcher := PubSubDispatcher{
+	d := PubSubDispatcher{
 		client:  client,
 		channel: channel,
 	}
 
-	return &dispatcher, nil
+	return &d, nil
 }
 
-func (dispatcher *PubSubDispatcher) Dispatch(ctx context.Context, body []byte) *webhookd.WebhookError {
+// Dispatch() relays 'body' to the Redis PubSub channel defined when 'd' was instantiated.
+func (d *PubSubDispatcher) Dispatch(ctx context.Context, body []byte) *webhookd.WebhookError {
 
 	select {
 	case <-ctx.Done():
@@ -64,7 +76,7 @@ func (dispatcher *PubSubDispatcher) Dispatch(ctx context.Context, body []byte) *
 		// pass
 	}
 
-	rsp := dispatcher.client.Publish(ctx, dispatcher.channel, string(body))
+	rsp := d.client.Publish(ctx, d.channel, string(body))
 
 	_, err := rsp.Result()
 
