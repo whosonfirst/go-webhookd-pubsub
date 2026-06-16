@@ -12,7 +12,7 @@ Before you begin please [read the go-webhookd documentation](https://github.com/
 
 ```
 import (
-	_ "github.com/go-webhookd-pubsub"
+	_ "github.com/go-webhookd-pubsub/v4"
 )
 ```
 
