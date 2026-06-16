@@ -3,17 +3,16 @@
 package main
 
 import (
-	_ "github.com/whosonfirst/go-webhookd-pubsub"
-)
-
-import (
 	"context"
 	"fmt"
 	"github.com/sfomuseum/go-flags/flagset"
-	"github.com/whosonfirst/go-webhookd/v3/config"
-	"github.com/whosonfirst/go-webhookd/v3/daemon"
 	"log"
 	"os"
+
+	_ "github.com/whosonfirst/go-webhookd-pubsub/v4"
+
+	"github.com/whosonfirst/go-webhookd/v4/config"
+	"github.com/whosonfirst/go-webhookd/v4/daemon"
 )
 
 func main() {

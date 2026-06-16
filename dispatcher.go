@@ -3,12 +3,12 @@ package pubsub
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
-	"github.com/whosonfirst/go-webhookd/v3"
-	"github.com/whosonfirst/go-webhookd/v3/dispatcher"
-	_ "log"
 	"net/url"
 	"strings"
+
+	"github.com/redis/go-redis/v9"
+	"github.com/whosonfirst/go-webhookd/v4"
+	"github.com/whosonfirst/go-webhookd/v4/dispatcher"
 )
 
 func init() {
@@ -32,7 +32,7 @@ type PubSubDispatcher struct {
 
 // NewPubSubDispatcher returns a new `PubSubDispatcher` instance configured by 'uri' in the form of:
 //
-// 	pubsub://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CHANNEL}
+//	pubsub://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CHANNEL}
 func NewPubSubDispatcher(ctx context.Context, uri string) (webhookd.WebhookDispatcher, error) {
 
 	u, err := url.Parse(uri)
