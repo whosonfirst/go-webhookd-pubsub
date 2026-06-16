@@ -3,11 +3,12 @@ package pubsub
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
-	"github.com/whosonfirst/go-webhookd/v3/dispatcher"
 	"log"
 	"testing"
 	"time"
+
+	"github.com/redis/go-redis/v9"
+	"github.com/whosonfirst/go-webhookd/v4/dispatcher"
 )
 
 func TestPubSubDispatcher(t *testing.T) {
@@ -18,7 +19,9 @@ func TestPubSubDispatcher(t *testing.T) {
 	redis_channel := "example"
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: redis_host,
+		Addr:     redis_host,
+		Password: "",
+		DB:       0,
 	})
 
 	_, err := rdb.Ping(ctx).Result()
